@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ASVD - All Social Video Downloader</title>
+    <meta name="description" content="ASVD is your ultimate social media video downloader. Download Instagram Reels, TikTok videos without watermark, Twitter/X videos, and more for free.">
+    <meta name="keywords" content="ASVD, social media video downloader, insta downloader, tiktok video downloader without watermark, twitter video downloader, free video downloader, download HD videos">
+    <meta name="author" content="Ali Sufian">
+    <meta property="og:title" content="ASVD - Universal Social Video Downloader">
+    <meta property="og:description" content="Download high-quality videos from Instagram, TikTok, Twitter, YouTube, and Facebook instantly with ASVD.">
+    <meta property="og:type" content="website">
+    <!-- Google Fonts for Modern Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <!-- Background Effects -->
+    <div class="background-effects">
+      <div class="glow-orb orb-1"></div>
+      <div class="glow-orb orb-2"></div>
+    </div>
+    
+    <!-- Top Navbar -->
+    <nav class="navbar">
+      <div class="top-logo">
+        <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+        </svg>
+        <span class="logo-text">ASVD</span>
+      </div>
+    </nav>
+
+    <!-- Hero Section (100vh) -->
+    <section class="hero-section">
+      <div id="app">
+        <header class="header">
+          <h1 class="visually-hidden">All Social Video Downloader</h1>
+          <p class="subtitle">Download high-quality videos from any social media platform instantly. Just drop the link below.</p>
+        </header>
+
+        <section class="downloader-card">
+          <form id="download-form" class="input-group">
+            <div class="input-wrapper">
+              <svg class="link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+              </svg>
+              <input 
+                type="url" 
+                id="video-url" 
+                placeholder="Paste Instagram, TikTok or Twitter link here..."
+                required
+                autocomplete="off"
+              />
+            </div>
+            <button type="submit" id="download-btn">
+              <span class="btn-text">Download</span>
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </button>
+          </form>
+
+          <!-- Loading State -->
+          <div id="loading-state" class="hidden">
+            <div class="spinner"></div>
+            <p>Extracting video details...</p>
+          </div>
+
+          <!-- Result Area -->
+          <div id="result-area" class="hidden">
+            <div class="result-card">
+              <div class="thumbnail-wrapper">
+                <img id="video-thumbnail" src="" alt="Video Thumbnail" />
+                <div class="play-overlay">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </div>
+              </div>
+              <div class="video-info">
+                <h3 id="video-title">Video Title Goes Here</h3>
+                <p id="video-meta">Platform • Duration • Quality</p>
+                <div class="download-options">
+                  <a href="#" id="direct-dl-btn" class="action-btn primary" download>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                    </svg>
+                    Download MP4
+                  </a>
+                  <a href="#" id="audio-dl-btn" class="action-btn secondary" download>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+                    </svg>
+                    Audio Only
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Error State -->
+          <div id="error-message" class="hidden error-toast">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span id="error-text">Failed to fetch video. Please check the URL.</span>
+          </div>
+
+        </section>
+
+        <section class="features">
+          <div class="feature">
+            <div class="feature-icon instagram-icon"></div>
+            <span>Instagram Reels</span>
+          </div>
+          <div class="feature">
+            <div class="feature-icon tiktok-icon"></div>
+            <span>TikTok Videos</span>
+          </div>
+          <div class="feature">
+            <div class="feature-icon twitter-icon"></div>
+            <span>X (Twitter) Clips</span>
+          </div>
+          <div class="feature">
+             <div class="feature-icon youtube-icon"></div>
+             <span>YouTube Shorts</span>
+          </div>
+        </section>
+      </div>
+      
+      <!-- Scroll Indicator -->
+      <div class="scroll-indicator">
+        <p>Learn More</p>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+        </svg>
+      </div>
+    </section>
+
+    <!-- SEO Content Sections -->
+    <main class="content-sections">
+      
+      <!-- Section 1: How it works (Organic Steps) -->
+      <section class="seo-section steps-section">
+        <div class="seo-container">
+          <div class="section-header">
+            <span class="eyebrow">Simplicity First</span>
+            <h2>Download in 3 clicks.</h2>
+          </div>
+          
+          <div class="human-steps">
+            <div class="h-step">
+              <div class="step-bg-number">01</div>
+              <div class="step-content">
+                <h3>Find & Copy</h3>
+                <p>Grab the link of the video from Instagram, TikTok, or X. No need to install anything on your device.</p>
+              </div>
+            </div>
+            
+            <div class="h-step mt-xl">
+              <div class="step-bg-number">02</div>
+              <div class="step-content">
+                <h3>Paste the Link</h3>
+                <p>Drop the URL right into our search box. Our engine instantly analyzes and extracts the highest quality available.</p>
+              </div>
+            </div>
+            
+            <div class="h-step mt-xxl">
+              <div class="step-bg-number">03</div>
+              <div class="step-content">
+                <h3>Save & Enjoy</h3>
+                <p>Choose video or audio format. The file is saved securely straight to your local storage, watermark-free.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 2: Features (Bento Grid) -->
+      <section class="seo-section bento-section">
+        <div class="seo-container">
+          <div class="section-header center">
+            <span class="eyebrow">Why ASVD</span>
+            <h2>Built for content creators.</h2>
+            <p class="desc">We focused on what actually matters: speed, quality, and privacy.</p>
+          </div>
+          
+          <div class="bento-grid">
+            <div class="bento-box bento-large">
+              <div class="bento-inner">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                <div class="bento-text">
+                  <h4>Blazing Fast Engine</h4>
+                  <p>We built our extraction engine to bypass rate limits, getting your video ready in milliseconds, not minutes.</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="bento-box bento-tall">
+              <div class="bento-inner">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+                <div class="bento-text">
+                  <h4>100% Secure & Private</h4>
+                  <p>Zero logging. No tracking. We don't save what you download. Your privacy is non-negotiable.</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="bento-box">
+              <div class="bento-inner">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <div class="bento-text">
+                  <h4>Max Resolution</h4>
+                  <p>Always fetches the highest possible quality directly from the source.</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="bento-box">
+              <div class="bento-inner">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+                </svg>
+                <div class="bento-text">
+                  <h4>Audio Rip</h4>
+                  <p>Extract clean MP3s from any supported clip instantly.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 3: FAQ -->
+      <section class="seo-section faq-section">
+        <div class="seo-container">
+           <div class="faq-layout">
+             <div class="faq-header">
+               <h2>Got questions?</h2>
+               <p>Everything you need to know about using ASVD.</p>
+             </div>
+             <div class="faq-items">
+               <div class="human-faq">
+                 <h4>Which platforms do you actually support?</h4>
+                 <p>Our core focus is Instagram (Reels & Posts), TikTok, X (Twitter), YouTube Shorts, and Facebook. We constantly update our extractors to keep up with their algorithm changes.</p>
+               </div>
+               <div class="human-faq">
+                 <h4>Is there a download limit?</h4>
+                 <p>No. You can download as many videos as you want. We designed this tool to be fully unrestricted and completely free.</p>
+               </div>
+               <div class="human-faq">
+                 <h4>Are the videos watermarked?</h4>
+                 <p>Never. ASVD removes platforms' watermarks (like TikTok's floating logo) so you get a clean, original file.</p>
+               </div>
+             </div>
+           </div>
+        </div>
+      </section>
+
+      <!-- SEO Content Article -->
+      <section class="seo-section article-section">
+        <div class="seo-container">
+          <div class="seo-article">
+            <h2>The Ultimate Tool for Content Creators</h2>
+            <p>Welcome to <strong>ASVD</strong> (All Social Video Downloader), the internet's most reliable and lightning-fast platform designed to help you save your favorite content. Whether you're looking for an <strong>insta downloader</strong> to save viral reels, a <strong>tiktok video downloader without watermark</strong> to repurpose trendy clips, or a tool to grab media from Twitter/X and Facebook, ASVD has you covered.</p>
+            <p>Our powerful <strong>social media video downloader</strong> engine runs entirely in the cloud, extracting the highest possible resolution directly from the source. No hidden fees, no shady apps to install, and absolutely zero compromises on quality. ASVD is built by creators, for creators, ensuring you have the ultimate workflow for archiving and enjoying digital media across all major networks.</p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="footer">
+      <div class="seo-container footer-flex">
+        <p class="copyright">&copy; 2026 ASVD - All Social Video Downloader.</p>
+        <p class="creator">Architected & Engineered by <a href="https://www.instagram.com/alis.code" target="_blank" rel="noopener noreferrer" class="creator-name">Ali Sufian</a></p>
+      </div>
+    </footer>
+
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
