@@ -1,6 +1,6 @@
-# 🚀 Universal Social Video Downloader
+# 🚀 All Social Video Downloader
 
-![UI Showcase](https://images.unsplash.com/photo-1611162617474-5b21e879e113?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80)
+![UI Showcase](https://ibb.co/tTjSyQfS)
 
 A sleek, premium, single-page web application that allows users to instantly download high-quality videos and audio from all major social media platforms including Instagram, TikTok, YouTube, X (Twitter), and Facebook.
 
