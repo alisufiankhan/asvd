@@ -7,7 +7,6 @@ A sleek, premium, single-page web application that allows users to instantly dow
 ## ✨ Features
 - **Universal Support:** Paste a link from almost any social platform, and the backend engine automatically determines the source and extracts the raw media.
 - **Direct MP4 & Audio:** Provides options to download the highest quality MP4 video or extract the audio directly.
-- **Premium Dark-Mode UI:** Built with a stunning glassmorphism aesthetic, smooth micro-animations, and dynamic glowing background orbs.
 - **Lightning Fast:** Uses `yt-dlp` on the backend to directly fetch Content Delivery Network (CDN) links without heavily burdening the server.
 
 ## 🛠️ Technology Stack
