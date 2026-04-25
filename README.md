@@ -1,6 +1,6 @@
 # 🚀 All Social Video Downloader
 
-![UI Showcase](https://ibb.co/tTjSyQfS)
+![UI Showcase](https://i.ibb.co/8GYQfH4/asvd.png)
 
 A sleek, premium, single-page web application that allows users to instantly download high-quality videos and audio from all major social media platforms including Instagram, TikTok, YouTube, X (Twitter), and Facebook.
 
