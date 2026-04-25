@@ -52,40 +52,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const setupDownloadBtn = (btn, url) => {
         btn.onclick = (e) => {
           e.preventDefault();
-          const newTab = window.open('', '_blank');
-          newTab.document.write(`
-            <!DOCTYPE html>
-            <html lang="en">
-            <head>
-              <meta charset="UTF-8">
-              <meta name="referrer" content="no-referrer">
-              <title>Downloading...</title>
-              <style>
-                body { margin: 0; height: 100vh; display: flex; justify-content: center; align-items: center; background: #0f172a; color: #f8fafc; font-family: system-ui, sans-serif; }
-                .loader-container { text-align: center; }
-                .spinner { width: 40px; height: 40px; border: 4px solid rgba(255, 255, 255, 0.1); border-left-color: #3b82f6; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 16px; }
-                @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-                p { margin: 0; font-weight: 500; font-size: 1.1rem; }
-              </style>
-            </head>
-            <body>
-              <div class="loader-container">
-                <div class="spinner"></div>
-                <p>Starting your download...</p>
-              </div>
-              <script>
-                const API_BASE = window.location.hostname === 'localhost' ? 'http://localhost:3001' : '';
-                const proxyUrl = API_BASE + "/api/proxy?url=" + encodeURIComponent("${url}");
-                const a = document.createElement('a');
-                a.href = proxyUrl;
-                document.body.appendChild(a);
-                a.click();
-                setTimeout(() => { window.close(); }, 2000);
-              </script>
-            </body>
-            </html>
-          `);
-          newTab.document.close();
+          // Directly navigate to the proxy URL which has Content-Disposition: attachment
+          // This prevents strict mobile browsers from blocking pop-ups.
+          const API_BASE = window.location.hostname === 'localhost' ? 'http://localhost:3001' : '';
+          const proxyUrl = API_BASE + "/api/proxy?url=" + encodeURIComponent(url);
+          window.location.href = proxyUrl;
         };
       };
       
